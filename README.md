@@ -43,11 +43,55 @@ Everytime we make a new `commit` to the git history, an full snapshot is taken t
 
 There are many similar systems as Git, but nowdays and for the last decade and a half git has been the most used version control. Among it's competitors we can find CVS, Subversion and Perforce.
 
-## Getting started
+## What do I need to know first?
 
-init
-clone
+`/.git` folder
 
+Git works at a folder level, meaning that every file within the specified folder will be tracked. In order to accomplish this git uses a specific hidden folder called `.git` which includes configuration, hooks, logs, and other details about the git repository.
+
+It is important to know that git _does not track folders, and instead works per file_, which means that if we create an empty folder git wouldn't recognize it as part of the project until a first file is added to it.
+
+`.gitignore`
+
+Sometimes we don't want to track some files within a project, for example dependencie libraries (which can be installed on demand) or files containing secrets (such as passwords or tokens). Git does provide a very easy to use mechanism for this called `.gitignore` which is a file that contains fixed names or blob patterns of directories or files that we will want to explicitly skip, for example:
+
+* node_modules: will igore all files or folders named node_modules.
+* **.bin: will ignore all files ending in .bin on any subfolder
+* src/*.exe: will ignore any .exe file inside src
+
+## Getting started commands
+
+`git config` is the command used in Git to set or get configuration options for a specific repository or globally for all repositories on a user's system.
+
+```bash
+git config
+git config --local
+```
+
+`git init` is a command used to initialize a new Git repository. When you run git init in a directory, it creates a new .git subdirectory in that directory, which contains all the necessary Git metadata for version control.
+
+```bash
+git init
+ls -la
+git config --local -l
+git config user.name "Pablo Abstracta"
+```
+
+```bash
+git remote get-url --all origin
+git remote set-url origin https://github.com/pjcalvo/super-duper-git
+```
+
+`git clone` is the command to create a copy of an existing Git repository on your local machine. When you run git clone, it copies the entire repository, including all its files, commit history, and metadata.
+
+_Note_: Keep in mind that depending on the repository setting and organization security policies you will have to choose between https or ssh to clone the repository. One uses authentication while the other one uses ssh keys to access the repository. SSH is more popular theses days.
+
+```bash
+rm -rf .git
+git clone https://github.com/pjcalvo/super-duper-git
+cd super-duper-git
+git remote get-url --all origin
+```
 
 ## Snapshoting (changing)
 
