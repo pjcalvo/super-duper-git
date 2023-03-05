@@ -55,9 +55,13 @@ It is important to know that git _does not track folders, and instead works per 
 
 Sometimes we don't want to track some files within a project, for example dependencie libraries (which can be installed on demand) or files containing secrets (such as passwords or tokens). Git does provide a very easy to use mechanism for this called `.gitignore` which is a file that contains fixed names or blob patterns of directories or files that we will want to explicitly skip, for example:
 
-* node_modules: will igore all files or folders named node_modules.
-* **.bin: will ignore all files ending in .bin on any subfolder
-* src/*.exe: will ignore any .exe file inside src
+* `node_modules`: will igore all files or folders named node_modules.
+* `**.bin`: will ignore all files ending in .bin on any subfolder
+* `src/*.exe`: will ignore any .exe file inside src
+
+`.gitkeep`
+
+Sometimes we also want to keep a folder structure as part of git. The accepted community way of doing this is by adding this file inside the folder that we want to preserve.
 
 ## Getting started commands
 
@@ -95,14 +99,100 @@ git remote get-url --all origin
 
 ## Snapshoting (changing)
 
-add
-status
-diff
-commit
-notes
-restore
-reset
-rm
-mv
+In Git, there are several stages in which changes are saved and tracked before they become part of the permanent history of the repository. 
 
+1) These stages include the working directory. Where we make changes to a file
+2) The staging area (also known as the index). Still local, changes could be lost if not added to the repository.
+3) And the repository itself. Permanent changes are done on this stage.
+
+### Commands
+
+`git status` is a command used  to show the current status of the repository. This command is our best friend when discovering changes in the working git project. These changes could be:
+
+1. Changes made to the files in the repository since the last commit.
+2. Untracked files that have not yet been added to the repository.
+3. Branch and commit information, including the current branch you are on.
+4. Any files that are staged for commit.
+
+```bash
+git status
+touch newfile.txt
+echo line1 >> newfile.txt
+git status
+```
+
+`git add` is the command used to add changes made to files in the repository to the staging area, also known as the index.
+
+```bash
+git add newfile.txt
+git status
+touch newfile2.txt && touch newfile3.txt
+git add .
+git status
+```
+
+`git diff` is the command to show the differences between different versions of files in the repository.
+
+```bash
+git diff
+echo line2 >> newfile.txt
+git diff
+rm -rf newfile.txt
+git diff
+```
+
+`git commit` is the command used to save changes made to files in the repository as a new commit.
+
+```bash
+git commit -m 'this is a nice commit'
+```
+
+`git log` is the command used in the Git version control system to show the commit history of a repository.
+
+```bash
+git log
+```
+
+`git show` is useful for reviewing the changes made in a specific commit and understanding how the repository has evolved over time. You can use git show to view the changes made in a recent commit or to compare the changes made in different commits to identify bugs or other issues.
+
+```bash
+git show de4c631e312a152ec14289838551030704b634a4
+```
+
+`git reset` is a command used to undo changes to the repository. It is a powerful command that can be used to unstage changes, reset the repository to a previous state, or delete commits.
+
+```bash
+touch newfile2.txt
+git add .
+git status
+git reset 
+git add .
+git commit -m 'some other commit'
+git log
+git reset --soft HEAD~1
+git log
+git add .
+git commit -m 'more commits'
+git log
+git reset --hard HEAD~1
+git log
+```
+
+`git restore` git restore is another undo changes to files in the working directory. It is similar to git reset, but it only affects the working directory and does not modify the staging area or the commit history.
+
+```bash
+echo somechanges >> README.md
+git status
+git restore README.md
+```
+
+## Working with the origin
+
+`git push`
+
+`git restore`
+
+`git merge`
+
+`git rebase`
 
