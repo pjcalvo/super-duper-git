@@ -271,6 +271,14 @@ git rebase main
 ls
 ```
 
-## Conflict resolution
+## Exercice
 
-...
+1. Initialize a new Git repository (empty).
+2. Create a new file in the repository and add some content to it.
+3. Use the git status command to check the status of the repository and see which files have changed.
+4. Add the new file to the stage.
+5. Create another file and add more content
+6. Add the new file to the stage.
+7. Create a commit with the message 'my first commit'
+8. Try to run push (will fail)
+9. Send me a screenshot of `git show`
