@@ -186,13 +186,91 @@ git status
 git restore README.md
 ```
 
+## Branching
+
+A branch is a separate line of development in a software project. It is a copy of the codebase that diverges from the main or master branch to allow developers to work on new features, bug fixes, or experiments without affecting the stability of the main codebase.
+
+`git branch` is the command that will allow us to see and manipulate branches in our workspace.
+
+```bash
+git branch -a
+git branch -l
+```
+
+`git checkout` is the command used to switch between different branches or to navigate between different commits within a branch.
+
+```bash
+git checkout this-branch
+git status
+git checkout -
+git status
+```
+
+```bash
+git checkout -b new-branch
+git checkout -
+git branch -D new-branch
+git branch -a
+```
+
 ## Working with the origin
 
-`git push`
+`git fetch` is used to download changes from a remote repository to a local repository.
 
-`git restore`
+```bash
+git checkout this-branch
+# changes
+git fetch
+ls
+```
 
-`git merge`
+`git pull` is used to update a local repository with changes from a remote repository. It combines two other Git commands: git fetch and git merge.
+
+```bash
+git pull
+ls
+```
+
+In summary `git fetch` retrieves the latest changes from a remote repository without modifying the local working directory. In contrast, `git pull` not only retrieves the changes but also automatically merges them with the local branch, potentially resulting in modifications to the local working directory
+
+`git push` is the command that is used to upload local changes to a remote repository. Every change we have staged (commits) will be pushed to the repository
+
+```bash
+git checkout -b new-branch-<yourinitials>
+git commit -m 'my first commit' --allow-empty
+git push
+# error
+git push --set-upstream origin new-branch-<yourinitials>
+git fetch
+git branch -a
+```
+
+## Merging and rebasing
+
+![rebase-merge](https://jeffkreeftmeijer.com/git-rebase/git-rebase.png)
+
+`git merge` is used to integrate changes from one branch into another branch. It is used to combine two or more branches into a single branch.
+
+```bash
+# changes
+git checkout main
+git pull
+git checkout -
+git merge main
+ls
+```
 
 `git rebase`
 
+```bash
+# changes
+git checkout main
+git pull
+git checkout -
+git rebase main
+ls
+```
+
+## Conflict resolution
+
+...
